@@ -5,9 +5,6 @@ class NumericMethod:
         self.data = {}
         self.solution = []
 
-    def __str__(self):
-        return str(self.solution)
-
     def read_file(self):
         with open(self.input_file, 'r') as input:
             self.data = {
@@ -31,3 +28,4 @@ class NumericMethod:
 
     def write_csv(self):
         pass
+    
