@@ -2,4 +2,5 @@
 __pycache__/
 __pycache__/numeric_method.cpython-312.pyc
 __pycache__/running_method.cpython-312.pyc
-io_data/
+io_data/INPUT.txt
+io_data/OUTPUT.txt
