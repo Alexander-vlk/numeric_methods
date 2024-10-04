@@ -1,3 +1,4 @@
+import time
 import sys
 
 
@@ -31,7 +32,12 @@ if __name__ == '__main__':
         raise ModuleNotFoundError(
             f'No such numeric method {called_method}. Type "{help_commands[0]}" to see allowed methods.'
             )
+    
+    start = time.time()
 
     method = numeric_methods.get(called_method)(input_file=INPUT_FILE, output_file=OUTPUT_FILE)
-
     method.write_file()
+    
+    end = time.time() - start
+
+    print(f'Process finished at {end} seconds')
