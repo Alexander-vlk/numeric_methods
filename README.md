@@ -1,9 +1,7 @@
 # Numeric Methods
 
-~~~
 This repository contains дaboratory works onthe discipline 
 “Workshop on numerical methods”.
-~~~
 
 ## Introduction
 
