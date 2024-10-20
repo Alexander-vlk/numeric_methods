@@ -1,21 +1,28 @@
 import time
 import sys
-
+import logging
 
 from pathlib import Path
-
 
 from running_method import RunningMethod
 
 
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+
+
 if __name__ == '__main__':
-    
     BASE_DIR = Path(__file__).resolve().parent
 
-    INPUT_FILE = BASE_DIR.joinpath('io_data/INPUT.txt')
-    OUTPUT_FILE = BASE_DIR.joinpath('io_data/OUTPUT.txt')
+    log = logging.getLogger(__name__)
 
-    called_method = sys.argv[1]
+    try:
+        called_method, example_number, filetype = sys.argv[1:4]
+    except ValueError:
+        log.error('Not enough values...')
+        exit()
+
+    INPUT_FILE = BASE_DIR.joinpath(f'io_data/INPUT/{called_method}/{example_number}.txt')
+    OUTPUT_FILE = BASE_DIR.joinpath(f'io_data/OUTPUT/{called_method}/{example_number}.{filetype}')
 
     help_commands = ('--help', 'help', '--h', )
 
