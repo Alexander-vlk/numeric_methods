@@ -15,14 +15,7 @@ if __name__ == '__main__':
 
     log = logging.getLogger(__name__)
 
-    try:
-        called_method, example_number, filetype = sys.argv[1:4]
-    except ValueError:
-        log.error('Not enough values...')
-        exit()
-
-    INPUT_FILE = BASE_DIR.joinpath(f'io_data/INPUT/{called_method}/{example_number}.txt')
-    OUTPUT_FILE = BASE_DIR.joinpath(f'io_data/OUTPUT/{called_method}/{example_number}.{filetype}')
+    called_method = sys.argv[1]
 
     help_commands = ('--help', 'help', '--h', )
 
@@ -31,14 +24,24 @@ if __name__ == '__main__':
     }
 
     if called_method in help_commands:
-        print('Available numeric methods:')
+        log.info('Available methods')
         print('\n'.join(numeric_method for numeric_method in numeric_methods.keys()))
         exit()
+
+    try:
+        example_number, filetype = sys.argv[2:4]
+    except ValueError:
+        log.error('Not enough values...')
+        exit()
+
+    INPUT_FILE = BASE_DIR.joinpath(f'io_data/INPUT/{called_method}/{example_number}.txt')
+    OUTPUT_FILE = BASE_DIR.joinpath(f'io_data/OUTPUT/{called_method}/{example_number}.{filetype}')
     
     if not numeric_methods.get(called_method):
-        raise ModuleNotFoundError(
+        log.error(
             f'No such numeric method {called_method}. Type "{help_commands[0]}" to see allowed methods.'
             )
+        exit()
     
     start = time.time()
 
@@ -47,4 +50,4 @@ if __name__ == '__main__':
     
     end = time.time() - start
 
-    print(f'Process finished at {end} seconds')
+    log.info(f'Process finished at {end} seconds')
