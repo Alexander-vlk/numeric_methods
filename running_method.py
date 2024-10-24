@@ -1,12 +1,12 @@
 import logging
 
-from numeric_method import NumericMethod
+from file_reader import LinearSystemFileReader
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 
-class RunningMethod(NumericMethod):
+class RunningMethod(LinearSystemFileReader):
     __EPSILON = 10e-6
     __ROUND_VALUE = 6
 

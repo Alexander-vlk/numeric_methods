@@ -5,6 +5,8 @@ import logging
 from pathlib import Path
 
 from running_method import RunningMethod
+from two_dim_approximation import TwoDimApproximation
+from newton_method import NewtonNumericMethod
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -21,6 +23,8 @@ if __name__ == '__main__':
 
     numeric_methods = {
         'running_method': RunningMethod,
+        'two_dimensional_approximation': TwoDimApproximation,
+        'newton_method': NewtonNumericMethod,
     }
 
     if called_method in help_commands:
@@ -34,7 +38,7 @@ if __name__ == '__main__':
         log.error('Not enough values...')
         exit()
 
-    INPUT_FILE = BASE_DIR.joinpath(f'io_data/INPUT/{called_method}/{example_number}.txt')
+    INPUT_FILE = BASE_DIR.joinpath(f'io_data/INPUT/{called_method}/{example_number}.{filetype}')
     OUTPUT_FILE = BASE_DIR.joinpath(f'io_data/OUTPUT/{called_method}/{example_number}.{filetype}')
     
     if not numeric_methods.get(called_method):
@@ -46,7 +50,7 @@ if __name__ == '__main__':
     start = time.time()
 
     method = numeric_methods.get(called_method)(input_file=INPUT_FILE, output_file=OUTPUT_FILE)
-    method.write_file()
+    method.write_csv(1000)
     
     end = time.time() - start
 
